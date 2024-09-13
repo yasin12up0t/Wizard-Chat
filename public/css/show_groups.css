@@ -1,0 +1,670 @@
+/* General Styles */
+.Main_container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: white !important;
+
+}
+.container {
+    padding: 0;
+    margin: 0;
+}
+
+button{
+    border: none;
+    background: none;
+}
+.Chat_box_header button{
+    color: #FFA500;
+}
+.Chat_box_header button:hover{
+    color: #FFD500;
+}
+
+/* Chat List */
+.chatlist_container {
+    width: 25%;
+    background: black;
+    overflow-y: auto;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+}
+.chatlist_container.hidden {
+    display: none; /* Hide on mobile */
+}
+
+/* Chat Box */
+.Chat_box_container {
+    width: 75%;
+    background: rgb(26, 26, 26);
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%; /* Space for chat list */
+}
+.Chat_box_header {
+    background-color: black;
+    color: #FFA500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Info List Container */
+.InfoList_container {
+    position: fixed;
+    top: 0;
+    right: -30%; /* Initially hidden */
+    width: 30%;
+    height: 100%;
+    background: black;
+    overflow-y: auto;
+    color: #fff;
+    padding: 20px;
+    transition: right 0.3s ease-in-out; /* Smooth slide effect */
+    z-index: 1000;
+}
+.InfoList_container.active {
+    right: 0; /* Slide in */
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .chatlist_container {
+        width: 80%;
+        transform: translateX(-100%); /* Initially hidden */
+    }
+
+    .chatlist_container.active {
+        transform: translateX(0); /* Slide in */
+    }
+
+    .Chat_box_container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* Input Group */
+    .input-group {
+        width: 100% !important;
+    }
+    .InfoList_container {
+        width: 100%;
+        right: -100%; /* Initially hidden */
+    }
+
+    .InfoList_container.active {
+        right: 0; /* Slide in */
+    }
+}
+
+/* Input Group */
+.input-group {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 75%;
+    background-color: black;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+}
+.input-group textarea.form-control {
+    flex-grow: 1;
+    margin-right: 10px;
+    border-radius: 20px;
+    border: 1px solid #FFA500;
+    padding: 10px;
+    resize: none;
+    overflow-y: auto;
+    background-color: #242424;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.input-group textarea.form-control:focus {
+    border-color: #FFA500;
+    outline: none;
+    box-shadow: 0 0 5px #FFA500;
+}
+
+.input-group button {
+    border: none;
+    background-color: #FFA500;
+    color: white;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+}
+
+.input-group button:hover {
+    background-color: #FFD500;
+}
+
+/* Search Input */
+#search {
+    border-radius: 25px;
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+    position: relative;
+    z-index: 1001;
+}
+#search:focus {
+    border-color: #FFA500;
+    outline: none;
+}
+
+/* User List */
+#user-list {
+    position: absolute;
+    z-index: 1000;
+    width: 222px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.644);
+    border-radius: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #FFA500 rgba(0, 0, 0, 0.1);
+}
+#user-list::-webkit-scrollbar {
+    width: 8px;
+}
+#user-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+#user-list::-webkit-scrollbar-thumb {
+    background-color: #FFA500;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+
+/* List Group Styles */
+.list-group {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.list-group-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #202020;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.list-group-item:hover {
+    background-color: #303030;
+}
+.list-group-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+
+/* Conversation Item */
+.conversation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.conversation-item .msgscount {
+    font-size: 10px;
+    color: #fff;
+    background-color: #FFA500;
+    border-radius: 12px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    text-align: center;
+}
+.conversation-item .lastmsg {
+    font-size: 12px;
+    color: #919191;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 50px);
+}
+.conversation-item .msgsdate {
+    font-size: 10px;
+    color: #6c757d;
+}
+/* Profile Update */
+h5 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #FFA500;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Messages */
+.message {
+    max-width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for sent messages */
+.message.sent {
+    background-color: #FFA500;
+    align-self: flex-end;
+    margin-left: auto;
+    position: relative;
+}
+
+/* Styling for received messages */
+.message.received {
+    background-color: #333;
+    align-self: flex-start;
+    margin-right: auto;
+    position: relative;
+}
+
+/* Arrow styling for sent messages */
+.message.sent::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #FFA500;
+    transform: translateY(-50%);
+}
+
+/* Arrow styling for received messages */
+.message.received::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #333;
+    transform: translateY(-50%);
+}
+
+/* Additional styling for message content */
+.message-content {
+    margin-bottom: 5px;
+}
+
+/* Footer styling for messages */
+.message-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Status and button styling */
+.status-container {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.delete_msg_btn{
+    margin-right: 10px;
+}
+.delete_msg_btn:hover {
+    color: #dc3545;
+}
+.reply_msg_btn:hover{
+    color: greenyellow;
+}
+.message-time {
+    color: #6c757d;
+    margin-left: 10px;
+    font-size:12px;
+}
+/* Custom Scrollbars */
+#chat-box {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 110px);
+    padding: 10px;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #FFA500 #00000000;
+}
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+#chat-box {
+    scroll-behavior: smooth;
+}
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: black;
+
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #FFA500;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.uploaded-image {
+    max-width: 100%; /* Make the image scale with the container width */
+    height: auto;    /* Maintain the aspect ratio */
+}
+
+@media (max-width: 768px) {
+    .uploaded-image {
+        max-width: 100%; /* Ensure the image takes up full width on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .uploaded-image {
+        max-width: 100%; /* Adjust further for mobile devices */
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.cont_btns{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.cont_btns button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FFA500;
+}
+.cont_btns button:hover{
+    background-color: #FFD500;
+}
+
+#close_infolist{
+    color: #FFA500;
+    margin-bottom: 10px;
+}
+#close_infolist:hover{
+    color: #FFD500;
+}
+
+.profile-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; /* Center the container */
+}
+/* Hidden Input Field */
+.hidden-input {
+    display: none;
+}
+
+/* Change Buttons on Hover */
+.change-cover-btn  {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    cursor: pointer;
+}
+.change-profile-btn{
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    cursor: pointer;
+}
+
+.cover-photo-container:hover .change-cover-btn,
+.profile-photo-container:hover .change-profile-btn {
+    display: block;
+}
+
+/* Icon Inside the Button */
+.change-cover-btn i, .change-profile-btn i {
+    margin-right: 5px;
+}
+
+/* Input Field */
+.conditions_form_control {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.cover-photo {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+.profile-photo {
+    position: absolute;
+    top: 50px; /* Pulls the image down into the cover photo area */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid white; /* Creates a border around the profile picture */
+    object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+.user-info {
+    background: rgb(46, 46, 46);
+    color: #fff;
+    padding: 60px 10px 10px; /* Adjust padding to account for the profile picture */
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+#user-name, #user-email, #user-bio, #user-gender, #user-phone {
+    overflow-wrap: break-word; /* Allows long words to break onto the next line */
+    word-wrap: break-word; /* Older syntax for similar functionality */
+    white-space: normal; /* Ensures text can wrap to the next line */
+}
+
+
+.group-members-list{
+    max-height: 320px;
+    overflow: auto;
+}
+
+.groups_toggle_btn:hover{
+    color: #FFD500;
+}
+
+/* Form Container */
+.group_cover_form {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+/* Form Group */
+.group_cover_form_group {
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.group_cover_form_group label {
+    font-weight: 600;
+    color: #b3b3b3;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Input Fields */
+.form-control {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus on Input */
+.form-control:focus {
+    border-color: #FFA500;
+    box-shadow: 0 0 5px #FFA500;
+    outline: none;
+}
+
+/* Textarea */
+textarea.form-control {
+    resize: vertical;
+}
+
+/* File Inputs */
+input[type="file"] {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    padding: 10px;
+    border: none;
+}
+
+/* Submit Button */
+.Update_Images_btn {
+    background-color: #FFA500;
+    color: #121212;
+    padding: 14px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    font-weight: bold;
+}
+
+.Update_Images_btn:hover {
+    background-color: #FFD500;
+    transform: translateY(-2px);
+}
+
+/* Form Container: Responsive Adjustments */
+@media (max-width: 768px) {
+    .group_cover_form {
+        padding: 15px;
+    }
+
+    .Update_Images_btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+
+.Add_Users_btn{
+    color: #FFA500;
+}
+.Add_Users_btn:hover{
+    color: #FFD500;
+}
+
+
+
+.Leave_Group_btn{
+    color: red;
+}
+.Leave_Group_btn:hover{
+    color: #FFD500;
+}
+
+
+.Join_Group_btn{
+    color: greenyellow;
+}
+.Join_Group_btn:hover{
+    color: #FFD500;
+}
